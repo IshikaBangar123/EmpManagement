@@ -1,4 +1,4 @@
-package com.management.EmpManagement.DTO.response;
+package com.management.EmpManagement.Dto.response;
 
 import com.management.EmpManagement.Enum.Status;
 import com.management.EmpManagement.Entity.Employee;
@@ -14,11 +14,12 @@ import java.sql.Date;
 @Data
 @Builder
 
-public class HalfDayResDto {
+public class WorkFromHomeResDto {
+
     private Long pwId;
     private Status leaveType;
     private String reason;
-    private Date ApplyDate;
+    private Date startDate;
+    private Date endDate;
     private Employee employee;
-
 }

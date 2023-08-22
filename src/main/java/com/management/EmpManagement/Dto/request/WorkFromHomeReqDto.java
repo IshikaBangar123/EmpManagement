@@ -1,4 +1,4 @@
-package com.management.EmpManagement.DTO.response;
+package com.management.EmpManagement.Dto.request;
 
 import com.management.EmpManagement.Enum.Status;
 import com.management.EmpManagement.Entity.Employee;
@@ -9,16 +9,17 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 
-public class WorkFromHomeResDto {
+public class WorkFromHomeReqDto {
 
-    private Long pwId;
     private Status leaveType;
     private String reason;
+    private Date ApplyDate;
     private Date startDate;
     private Date endDate;
     private Employee employee;

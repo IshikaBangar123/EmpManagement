@@ -1,4 +1,4 @@
-package com.management.EmpManagement.DTO.request;
+package com.management.EmpManagement.Dto.response;
 
 import com.management.EmpManagement.Enum.Status;
 import com.management.EmpManagement.Entity.Employee;
@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 import java.sql.Date;
 import java.sql.Time;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 
-public class PartialReqDto {
-
+public class PartialResDto {
+    private Long pwId;
     private Status leaveType;
     private String reason;
     private Date ApplyDate;
