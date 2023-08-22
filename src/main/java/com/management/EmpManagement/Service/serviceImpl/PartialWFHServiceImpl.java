@@ -1,9 +1,8 @@
-package com.management.EmpManagement.Service.serviceImpl;
+package com.management.EmpManagement.Service.ServiceImpl;
 
-import com.management.EmpManagement.Dto.request.HalfDayReqDto;
 import com.management.EmpManagement.Dto.request.PartialReqDto;
 import com.management.EmpManagement.Dto.request.WorkFromHomeReqDto;
-import com.management.EmpManagement.Dto.response.HalfDayResDto;
+
 import com.management.EmpManagement.Dto.response.PartialResDto;
 import com.management.EmpManagement.Dto.response.WorkFromHomeResDto;
 import com.management.EmpManagement.Entity.PartialWorkFromHome;
@@ -40,13 +39,6 @@ public class PartialWFHServiceImpl implements PartialWfhService {
         return new ResponseEntity<>(map1, HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<?> applyForHalfDay(HalfDayReqDto halfDayReqDto) {
-        PartialWorkFromHome map = this.modelMapper.map(halfDayReqDto, PartialWorkFromHome.class);
-        PartialWorkFromHome save = this.partialWFHRepository.save(map);
-        HalfDayResDto map1 = this.modelMapper.map(save, HalfDayResDto.class);
-        return new ResponseEntity<>(map1, HttpStatus.OK);
-    }
 
  /*   @Override
     public ResponseEntity<?> viewLeaveById(Long pwId) {

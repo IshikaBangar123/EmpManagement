@@ -1,7 +1,8 @@
 package com.management.EmpManagement.Dto.response;
 
+import com.management.EmpManagement.Entity.EmployeeEntity;
 import com.management.EmpManagement.Enum.Status;
-import com.management.EmpManagement.Entity.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +23,5 @@ public class PartialResDto {
     private String reason;
     private Date ApplyDate;
     private Time timeOfPartialDay;
-    private Employee employee;
+    private EmployeeEntity employee;
 }
