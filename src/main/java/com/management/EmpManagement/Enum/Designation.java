@@ -22,6 +22,7 @@ public enum Designation {
     SR_ANDROID_DEVELOPER("Jr_Android_Developer"),
     SALES("Sales");
 
+
     private String Designation;
 
 }
