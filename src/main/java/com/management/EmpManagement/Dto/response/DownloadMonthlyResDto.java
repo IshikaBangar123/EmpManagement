@@ -12,6 +12,6 @@ public class DownloadMonthlyResDto {
     private LocalTime outDuration;
     private LocalDate PunchDate;
     private LocalTime punchRecord;
-    private String empId;
+    private String empCode;
     private String name;
 }

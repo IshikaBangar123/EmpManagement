@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 public class CheckOutReqDto {
-    private Long empId;
+    private String empCode;
     private LocalDate PunchDate;
     private Action punchAction;
 

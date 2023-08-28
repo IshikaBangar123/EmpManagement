@@ -21,7 +21,7 @@ public class CheckInResDto {
 
 
     private Long sno;
-    private String empId;
+    private String empCode;
     private LocalDate PunchDate;
     private LocalTime inDuration;
     private Action punchAction;

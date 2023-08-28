@@ -70,11 +70,11 @@ public class AttendanceController {
         String headerValue = "attachment; filename=users_" + currentDate.toString() + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        List<Attendance> list = attendanceRepository.findByPunchDateBetween(previousMonthStartDate, endDate);
+       List<Attendance> list = attendanceRepository.findByPunchDateBetween(previousMonthStartDate, endDate);
 
-        UserExcelService excelExporter = new UserExcelService(list);
+       UserExcelService excelExporter = new UserExcelService(list);
 
-        excelExporter.export(response);
+     excelExporter.export(response);
     }
 
 

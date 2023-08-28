@@ -11,8 +11,8 @@ import java.util.List;
 public interface AttendanceRepository extends JpaRepository<Attendance,Long> {
 
 
-    List<Attendance> findByEmployeeEmpId(String empId);
+    List<Attendance> findByEmpCode(String empCode);
     List<Attendance> findByPunchDateBetween(LocalDate startDate, LocalDate endDate);
-
-    List<Attendance> findByEmployeeEmpIdAndPunchDate(String empId, LocalDate punchDate);
+    List<Attendance> findByEmployeeEmpCodeAndPunchDate(String empCode, LocalDate punchDate);
 }
+

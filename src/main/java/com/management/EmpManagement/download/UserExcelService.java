@@ -66,7 +66,7 @@ public class UserExcelService {
 
             createCell(row, columnCount++, String.valueOf(b.getSno()), style);
             createCell(row, columnCount++, String.valueOf(b.getEmployee().getId()), style);
-            createCell(row, columnCount++, b.getEmployee().getEmpId(), style);
+            createCell(row, columnCount++, b.getEmployee().getEmpCode(), style);
             createCell(row, columnCount++, String.valueOf(b.getInDuration()), style);
             createCell(row, columnCount++, String.valueOf(b.getOutDuration()), style);
             createCell(row, columnCount++, String.valueOf(b.getPunchDate()), style);

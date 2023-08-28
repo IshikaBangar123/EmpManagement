@@ -14,7 +14,7 @@ import java.time.LocalTime;
 public class PunchRecordReqDto {
 
 
-    private String empId;
+    private String empCode;
     private Long id;
     private LocalTime inDuration;
     private LocalTime outDuration;

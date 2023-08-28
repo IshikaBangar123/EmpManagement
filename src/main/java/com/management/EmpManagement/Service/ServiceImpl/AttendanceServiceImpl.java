@@ -42,14 +42,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     public ResponseEntity<?> checkInTime(CheckInReqDto checkInReqDto) {
         Attendance map = this.modelMapper.map(checkInReqDto, Attendance.class);
-        final Optional<EmployeeEntity> byId = employeeRe.findByEmpId(String.valueOf(checkInReqDto.getEmpId()));
+        final Optional<EmployeeEntity> byId = employeeRe.findByEmpCode(String.valueOf(checkInReqDto.getEmpCode()));
         if (byId.isPresent()) {
             map.setInDuration(LocalTime.now());
             map.setPunchDate(LocalDate.now());
             map.setEmployee(byId.get());
             Attendance save = this.attendanceRepository.save(map);
             CheckInResDto map1 = this.modelMapper.map(save, CheckInResDto.class);
-            map1.setEmpId(save.getEmployee().getEmpId());
+            map1.setEmpCode(save.getEmployee().getEmpCode());
             return new ResponseEntity<>(map1, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Employee Id Not Found", HttpStatus.OK);
@@ -60,14 +60,14 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public ResponseEntity<?> checkOutTime(CheckOutReqDto checkOutReqDto) {
         Attendance map = this.modelMapper.map(checkOutReqDto, Attendance.class);
-        final Optional<EmployeeEntity> byId = employeeRe.findByEmpId(String.valueOf(checkOutReqDto.getEmpId()));
+        final Optional<EmployeeEntity> byId = employeeRe.findByEmpCode(String.valueOf(checkOutReqDto.getEmpCode()));
         if (byId.isPresent()) {
             map.setOutDuration(LocalTime.now());
             map.setPunchDate(LocalDate.now());
             map.setEmployee(byId.get());
             Attendance save = this.attendanceRepository.save(map);
             CheckOutResDto map1 = this.modelMapper.map(save, CheckOutResDto.class);
-            map1.setEmpId(save.getEmployee().getEmpId());
+            map1.setEmpCode(save.getEmployee().getEmpCode());
             return new ResponseEntity<>(map1, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Employee Id Not Found", HttpStatus.OK);
@@ -75,89 +75,48 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-        public ResponseEntity<?> totalWorkingHour(PunchRecordReqDto punchRecordReqDto) {
-            Optional<EmployeeEntity> employeeOptional = employeeRe.findByEmpId(String.valueOf(punchRecordReqDto.getEmpId()));
+    public ResponseEntity<?> totalWorkingHour(PunchRecordReqDto punchRecordReqDto) {
+        Optional<EmployeeEntity> employeeOptional = employeeRe.findByEmpCode(punchRecordReqDto.getEmpCode());
 
-            if (employeeOptional.isPresent()) {
-                List<Attendance> attendanceRecords = attendanceRepository.
-                        findByEmployeeEmpIdAndPunchDate(
-                        punchRecordReqDto.getEmpId(), punchRecordReqDto.getPunchDate());
+        if (employeeOptional.isPresent()) {
+            List<Attendance> attendanceRecords = attendanceRepository.
+                    findByEmployeeEmpCodeAndPunchDate(
+                            punchRecordReqDto.getEmpCode(), punchRecordReqDto.getPunchDate());
 
-                long totalMinutes = 0;
+            long totalMinutes = 0;
 
-                LocalTime lastPunchIn = null;
-                LocalTime lastPunchOut = null;
+            LocalTime lastPunchIn = null;
+            LocalTime lastPunchOut = null;
 
-                for (Attendance attendance : attendanceRecords) {
-                    if (attendance.getPunchAction() == Action.CHECK_IN) {
-                        lastPunchIn = attendance.getInDuration();
-                        if (lastPunchOut != null) {
-                            Duration duration = Duration.between(lastPunchOut, lastPunchIn);
-                            totalMinutes += duration.toMinutes();
-                        }
-                    } else if (attendance.getPunchAction() == Action.CHECK_OUT) {
-                        lastPunchOut = attendance.getOutDuration();
-                        if (lastPunchIn != null) {
-                            Duration duration = Duration.between(lastPunchIn, lastPunchOut);
-                            totalMinutes += duration.toMinutes();
-                        }
+            for (Attendance attendance : attendanceRecords) {
+                if (attendance.getPunchAction() == Action.CHECK_IN) {
+                    lastPunchIn = attendance.getInDuration();
+                    if (lastPunchOut != null) {
+                        Duration duration = Duration.between(lastPunchOut, lastPunchIn);
+                        totalMinutes += duration.toMinutes();
+                    }
+                } else if (attendance.getPunchAction() == Action.CHECK_OUT) {
+                    lastPunchOut = attendance.getOutDuration();
+                    if (lastPunchIn != null) {
+                        Duration duration = Duration.between(lastPunchIn, lastPunchOut);
+                        totalMinutes += duration.toMinutes();
                     }
                 }
-
-
-                long totalHours = totalMinutes / 60;
-                long remainingMinutes = totalMinutes % 60;
-
-                return new ResponseEntity<>(totalHours + " hours " + remainingMinutes + " minutes", HttpStatus.OK);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        }
-
-
-
-    /*public ResponseEntity<?> totalWorkingHour(PunchRecordReqDto punchRecordReqDto) {
-        Optional<EmployeeEntity> employeeOptional = employeeRe.findByEmpId(String.valueOf(punchRecordReqDto.getEmpId()));
-
-
-            if (employeeOptional.isPresent()) {
-                List<Attendance> attendanceRecords = attendanceRepository.findByEmployeeEmpId(punchRecordReqDto.getEmpId());
-
-                long totalMinutes = 0;
-
-                LocalTime lastPunchIn = null;
-                LocalTime lastPunchOut = null;
-
-                for (Attendance attendance : attendanceRecords) {
-                    if (attendance.getPunchAction() == Action.CHECK_IN) {
-                        lastPunchIn = attendance.getInDuration();
-                        if (lastPunchOut != null) {
-                            Duration duration = Duration.between(lastPunchOut, lastPunchIn);
-                            totalMinutes += duration.toMinutes();
-                        }
-                    } else if (attendance.getPunchAction() == Action.CHECK_OUT) {
-                        lastPunchOut = attendance.getOutDuration();
-                        if (lastPunchIn != null) {
-                            Duration duration = Duration.between(lastPunchIn, lastPunchOut);
-                            totalMinutes += duration.toMinutes();
-                        }
-                    }
-                }
-
-                // Calculate hours and minutes from totalMinutes
-                long totalHours = totalMinutes / 60;
-                long remainingMinutes = totalMinutes % 60;
-
-                return new ResponseEntity<>(totalHours + " hours " + remainingMinutes + " minutes", HttpStatus.OK);
-            } else {
-                return ResponseEntity.notFound().build();
             }
 
 
+            long totalHours = totalMinutes / 60;
+            long remainingMinutes = totalMinutes % 60;
+
+            return new ResponseEntity<>(totalHours + " hours " + remainingMinutes + " minutes", HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
         }
 
+    }
 
-*/
+
+
 
     @Override
     public ResponseEntity<?> downloadMonthlyAttendance(Attendance attendance) throws IOException {

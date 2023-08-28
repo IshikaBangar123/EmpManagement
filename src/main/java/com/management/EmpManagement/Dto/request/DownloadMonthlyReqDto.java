@@ -16,6 +16,7 @@ public class DownloadMonthlyReqDto {
     private LocalTime outDuration;
     private LocalDate PunchDate;
     private LocalTime punchRecord;
-    private String empId;
-    private String name;
+    private String empCode;
+    private String firstName;
+    private String lastName;
 }

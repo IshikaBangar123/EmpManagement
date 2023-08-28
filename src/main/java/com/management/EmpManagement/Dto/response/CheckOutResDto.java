@@ -18,7 +18,7 @@ import java.time.LocalTime;
 @Builder
 public class CheckOutResDto {
     private Long sno;
-    private String empId;
+    private String empCode;
     private LocalDate PunchDate;
     private LocalTime outDuration;
     private Action punchAction;

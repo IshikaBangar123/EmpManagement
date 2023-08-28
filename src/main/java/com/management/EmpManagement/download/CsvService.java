@@ -14,14 +14,14 @@ public class CsvService {
     private AttendanceRepository attendanceRepository;
 
     public void downloadCsvFile(PrintWriter printWriter) {
-        printWriter.write("sNo" + " " + "empId" + " " + "empName" + " " + "inDuration" + " " + "outDuration"+" punchDate"+"\n");
+        printWriter.write("sNo" + " " + "empId" + " " + "empFirstName" + " " + "inDuration" + " " + "outDuration"+" punchDate"+"\n");
 
 
         List<Attendance> attendances = attendanceRepository.findAll();
 
         for (Attendance book : attendances) {
             printWriter.write(book.getSno()
-                    + "," + book.getEmployee().getEmpId() + "," + book.getEmployee().getEmpName()
+                    + "," + book.getEmployee().getEmpCode() + "," + book.getEmployee().getFirstName()
                     + "," + book.getInDuration() + "," + book.getOutDuration() + book.getPunchDate() + "\n");
 
         }

@@ -4,9 +4,11 @@ package com.management.EmpManagement.Controller;
 import com.management.EmpManagement.Dto.EmployeeDto;
 import com.management.EmpManagement.Entity.EmployeeEntity;
 import com.management.EmpManagement.Service.EmployeeService;
+import com.management.EmpManagement.Util.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -17,7 +19,7 @@ public class EmployeeController {
     private EmployeeService empService;
 
     @PostMapping("/save")
-    public EmployeeEntity save(@RequestBody EmployeeDto dto){
+    public CommonResponse save(@RequestBody EmployeeDto dto) throws ParseException {
         return empService.saveEmp(dto);
     }
 

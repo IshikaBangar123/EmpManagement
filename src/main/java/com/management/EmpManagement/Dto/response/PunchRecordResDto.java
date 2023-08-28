@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PunchRecordResDto {
 
-    private Long empId;
+    private String empCode;
     private String TotalTime;
 }
