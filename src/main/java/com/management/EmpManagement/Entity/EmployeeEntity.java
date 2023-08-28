@@ -5,10 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -26,7 +27,5 @@ public class EmployeeEntity {
     private Date dateOfJoining;
     private String permanentAddress;
     private String localAddress;
-
-
 
 }

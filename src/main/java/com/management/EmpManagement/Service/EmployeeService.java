@@ -1,13 +1,16 @@
 package com.management.EmpManagement.Service;
 
-import com.management.EmpManagement.Dto.EmployeeDto;
+import com.management.EmpManagement.DTO.EmployeeDto;
 import com.management.EmpManagement.Entity.EmployeeEntity;
+import com.management.EmpManagement.Util.CommonResponse;
 
+import javax.persistence.Table;
+import java.text.ParseException;
 import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeEntity saveEmp(EmployeeDto dto);
+    CommonResponse saveEmp(EmployeeDto dto) throws ParseException;
 
     EmployeeEntity getByEmpId(Long id);
 
