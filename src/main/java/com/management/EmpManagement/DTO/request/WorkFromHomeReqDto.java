@@ -1,7 +1,7 @@
 package com.management.EmpManagement.DTO.request;
 
+import com.management.EmpManagement.Entity.EmployeeEntity;
 import com.management.EmpManagement.Enum.Status;
-import com.management.EmpManagement.Entity.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +22,5 @@ public class WorkFromHomeReqDto {
     private Date ApplyDate;
     private Date startDate;
     private Date endDate;
-    private Employee employee;
+    private EmployeeEntity employee;
 }

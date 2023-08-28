@@ -27,6 +27,6 @@ public class PartialWorkFromHome {
     private Time timeOfPartialDay;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "e_Id")
-    private Employee employee;
+    private EmployeeEntity employee;
 
 }
