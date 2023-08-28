@@ -26,8 +26,10 @@ public class MyControllerAdvice {
     }
 
     @ExceptionHandler(value = BusinessException.class)
-    public ResponseEntity<String> handlerBusinessException(BusinessException BusinessException) {
-        return new ResponseEntity<String>(Message.BOOKING_NAME_NOT_EXITS_DB, HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> handlerBusinessException(BusinessException businessException) {
+        System.out.println(businessException.getErrorMessage());
+        businessException.printStackTrace();
+        return new ResponseEntity<String>(Message.NAME_NOT_EXITS_DB, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = EmptyResultDataAccessException.class)
@@ -36,12 +38,16 @@ public class MyControllerAdvice {
     }
 
     @ExceptionHandler(value = IllegalStateException.class)
-    public ResponseEntity<String> handlerIllegalStateException(IllegalStateException IllegalStateException) {
+    public ResponseEntity<String> handlerIllegalStateException(IllegalStateException illegalStateException) {
+        System.out.println(illegalStateException.getMessage());
+        illegalStateException.printStackTrace();
         return new ResponseEntity<String>(Message.FIELD_NOT_EXITS_DB_UPDATE, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<String> handlerHttpMessageNotReadableException(HttpMessageNotReadableException httpMessageNotReadableException) {
-        return new ResponseEntity<String>(Message.BOOKING_NAME_NOT_EXITS_DB, HttpStatus.NOT_FOUND);
+        System.out.println(httpMessageNotReadableException.getHttpInputMessage());
+        httpMessageNotReadableException.printStackTrace();
+        return new ResponseEntity<String>(Message.NAME_NOT_EXITS_DB, HttpStatus.NOT_FOUND);
     }
 }
