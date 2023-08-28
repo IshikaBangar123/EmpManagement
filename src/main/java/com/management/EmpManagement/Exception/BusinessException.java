@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class BusinessException extends RuntimeException {
     //To make a class Custom Exception  extends RuntimeEXception
-    private int errorCode;
+    private String errorCode;
     private String errorMessage;
-
 
 }
