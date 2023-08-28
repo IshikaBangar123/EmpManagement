@@ -1,4 +1,4 @@
-package com.management.EmpManagement.Service.serviceImpl;
+package com.management.EmpManagement.Service.ServiceImpl;
 
 import com.management.EmpManagement.DTO.EmployeeDto;
 import com.management.EmpManagement.Entity.EmployeeEntity;
